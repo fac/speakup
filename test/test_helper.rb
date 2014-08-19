@@ -19,8 +19,14 @@ class ActionDispatch::IntegrationTest
   self.use_transactional_fixtures = false
 
   setup do
-    DatabaseCleaner.strategy = :deletion
     Capybara.current_driver = :poltergeist
+    DatabaseCleaner.strategy = :deletion
+    DatabaseCleaner.start
+  end
+
+  teardown do
+    Capybara.reset_sessions!
+    DatabaseCleaner.clean
   end
 
   Capybara.register_driver :poltergeist do |app|

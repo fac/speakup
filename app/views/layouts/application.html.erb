@@ -8,6 +8,15 @@
 </head>
 <body>
 
+<% if current_user %>
+  <%= button_to 'Log out', user_path(current_user), :method => 'delete' %>
+<% else %>
+  <%= form_for User.new do |f| %>
+    <%= f.hidden_field :name %>
+    <%= f.button 'Log in' %>
+  <% end %>
+<% end %>
+
 <%= yield %>
 
 </body>
