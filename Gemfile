@@ -39,8 +39,6 @@ gem 'unicorn'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
-gem 'heroku_secrets', git: 'https://github.com/alexpeattie/heroku_secrets.git'
-
 group :production do
   gem 'rails_12factor'
 end
