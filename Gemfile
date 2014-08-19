@@ -31,13 +31,15 @@ gem 'spring',        group: :development
 # gem 'bcrypt', '~> 3.1.7'
 
 # Use unicorn as the app server
-gem 'thin'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'heroku_secrets', git: 'https://github.com/alexpeattie/heroku_secrets.git'
 
 group :production do
   gem 'rails_12factor'
