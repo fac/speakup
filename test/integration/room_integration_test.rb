@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RoomTest < ActionDispatch::IntegrationTest
+class RoomIntegrationTest < ActionDispatch::IntegrationTest
 
   test 'creating new room' do
     visit '/'
@@ -24,6 +24,15 @@ class RoomTest < ActionDispatch::IntegrationTest
     click_button 'Log out'
     visit room_path(room)
     assert page.has_content? 'Participants: 0'
+  end
+
+  test 'joining room hides "Join room" button' do
+    login
+    room = Room.new(name: "meeting")
+    room.save!
+    visit room_path(room)
+    click_button 'Join room'
+    assert page.has_no_button?('Join room')
   end
 
 end

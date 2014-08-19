@@ -10,9 +10,11 @@
 <%= link_to 'Edit', edit_room_path(@room) %> |
 <%= link_to 'Back', rooms_path %>
 
-<% if logged_in? %>
+<% if logged_in? && !current_user.in_room?(@room) %>
   <%= form_for @participation do |f| %>
     <%= f.hidden_field :room_id %>
     <%= f.button 'Join room' %>
   <% end %>
+<% else %>
+  <p>Log in to join room</p>
 <% end %>
