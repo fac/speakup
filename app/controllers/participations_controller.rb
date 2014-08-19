@@ -1,9 +1,8 @@
 class ParticipationsController < ApplicationController
 
   def create
-    # TODO - don't create a new user each time
     participation = Participation.new(participation_params)
-    participation.user = User.new
+    participation.user = current_user
     if participation.save
       redirect_to room_path(participation.room)
     else

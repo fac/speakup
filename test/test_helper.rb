@@ -32,4 +32,9 @@ class ActionDispatch::IntegrationTest
   Capybara.register_driver :poltergeist do |app|
     Capybara::Poltergeist::Driver.new(app, :phantomjs_logger => STDOUT)
   end
+
+  def login
+    visit '/'
+    click_button 'Log in'
+  end
 end
