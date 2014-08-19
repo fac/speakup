@@ -41,9 +41,10 @@ gem 'byebug', group: [:development, :test]
 
 group :test do
   gem 'capybara'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails', "~> 4.0"
   gem 'launchy'
   gem 'poltergeist'
-  gem "database_cleaner"
 end
 
 group :production do
