@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<p>Participants: <%= @room.users.size %></p>
+
 <p>
   <strong>Name:</strong>
   <%= @room.name %>
@@ -7,3 +9,8 @@
 
 <%= link_to 'Edit', edit_room_path(@room) %> |
 <%= link_to 'Back', rooms_path %>
+
+<%= form_for @participation do |f| %>
+  <%= f.hidden_field :room_id %>
+  <%= f.button 'Join room' %>
+<% end %>

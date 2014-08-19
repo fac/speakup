@@ -16,7 +16,10 @@ class ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in all integration tests
   include Capybara::DSL
 
+  self.use_transactional_fixtures = false
+
   setup do
+    DatabaseCleaner.strategy = :deletion
     Capybara.current_driver = :poltergeist
   end
 

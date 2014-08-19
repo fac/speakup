@@ -11,4 +11,14 @@ class RoomTest < ActionDispatch::IntegrationTest
     assert page.has_content? 'Test room'
   end
 
+  test 'joining room increases partipant count' do
+    room = Room.new(name: "meeting")
+    room.save!
+    visit room_path(room)
+    assert page.has_content? 'Participants: 0'
+
+    click_button 'Join room'
+    assert page.has_content? 'Participants: 1'
+  end
+
 end

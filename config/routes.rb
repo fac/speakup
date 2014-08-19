@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :users
+  resources :participations
 
-  resources :models
+  resources :users
 
   resources :rooms
 

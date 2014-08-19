@@ -37,11 +37,13 @@ gem 'unicorn'
 # gem 'capistrano-rails', group: :development
 
 # Use debugger
-# gem 'debugger', group: [:development, :test]
+gem 'byebug', group: [:development, :test]
 
 group :test do
   gem 'capybara'
+  gem 'launchy'
   gem 'poltergeist'
+  gem "database_cleaner"
 end
 
 group :production do
