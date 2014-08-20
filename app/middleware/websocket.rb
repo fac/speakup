@@ -26,7 +26,6 @@ class Websocket
     if Faye::WebSocket.websocket?(env)
       ws = Faye::WebSocket.new(env, nil, {ping: KEEPALIVE_TIME })
       ws.on :open do |event|
-        puts "open"
         timer = EM.add_periodic_timer(REFRESH_PERIOD) do
           begin
             # For now, we just send all data to all clients

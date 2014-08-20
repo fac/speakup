@@ -19,13 +19,15 @@ class RoomRatingTest < ActionDispatch::IntegrationTest
     assert page.has_select?('Rating', :selected => '3')
   end
 
-  test 'once the user has joined room, she can submit rating' do
+  test 'once the user has joined room, she can submit ratings' do
     visit room_path(@room)
     click_button('Join room')
     select('2', :from => 'Rating')
     click_button('Submit')
     assert page.has_content? 'Average rating: 2'
     assert page.has_select?('Rating', :selected => '2')
+    select('5', :from => 'Rating')
+    click_button('Submit')
+    assert page.has_content? 'Average rating: 5'
   end
-
 end
