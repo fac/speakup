@@ -17,4 +17,5 @@ class Room < ActiveRecord::Base
     return nil if ratings.empty?
     ratings.map(&:score).sum.to_f/ratings.length
   end
+
 end

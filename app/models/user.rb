@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
   def rate(room, score)
     Rating.new(user: self, room: room, score: score).save!
   end
+
+  def last_rating_for(room)
+    ratings.where(room: room).order(created_at: :desc).first
+  end
 end

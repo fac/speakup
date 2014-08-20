@@ -4,7 +4,7 @@
 
 <% if logged_in? %>
   <% if current_user.in_room?(@room) %>
-    <%= form_for @rating do |f| %>
+    <%= form_for default_rating(@rating, @room) do |f| %>
       <%= f.hidden_field :room_id %>
       <%= f.label :score, 'Rating' %>
       <%= f.select :score, options_for_rating %>

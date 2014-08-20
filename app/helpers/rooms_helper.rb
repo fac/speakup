@@ -12,4 +12,8 @@ module RoomsHelper
     end
   end
 
+  def default_rating(rating, room)
+    rating || Rating.new(room: room, score: 3)
+  end
+
 end
