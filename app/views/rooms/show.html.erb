@@ -1,6 +1,6 @@
 <h2><%= @room.name %></h2>
 <p>Participants: <%= @room.users.size %></p>
-<p>Average rating: <%= @room.average_rating || "none" %></p>
+<p>Average rating: <%= average_rating(@room) %></p>
 
 <% if logged_in? %>
   <% if current_user.in_room?(@room) %>
