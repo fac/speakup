@@ -11,10 +11,19 @@
 <%= link_to 'Edit', edit_room_path(@room) %> |
 <%= link_to 'Back', rooms_path %>
 
-<% if logged_in? && !current_user.in_room?(@room) %>
-  <%= form_for @participation do |f| %>
-    <%= f.hidden_field :room_id %>
-    <%= f.button 'Join room' %>
+<% if logged_in? %>
+  <% if current_user.in_room?(@room) %>
+    <%= form_for @rating do |f| %>
+      <%= f.hidden_field :room_id %>
+      <%= f.label :score, 'Rating' %>
+      <%= f.select :score, options_for_rating %>
+      <%= f.button 'Submit score' %>
+    <% end %>
+  <% else %>
+    <%= form_for @participation do |f| %>
+      <%= f.hidden_field :room_id %>
+      <%= f.button 'Join room' %>
+    <% end %>
   <% end %>
 <% else %>
   <p>Log in to join room</p>
