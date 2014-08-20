@@ -1,15 +1,6 @@
-<p id="notice"><%= notice %></p>
-
+<h2><%= @room.name %></h2>
 <p>Participants: <%= @room.users.size %></p>
-<p>Average rating: <%= @room.average_rating %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @room.name %>
-</p>
-
-<%= link_to 'Edit', edit_room_path(@room) %> |
-<%= link_to 'Back', rooms_path %>
+<p>Average rating: <%= @room.average_rating || "none" %></p>
 
 <% if logged_in? %>
   <% if current_user.in_room?(@room) %>

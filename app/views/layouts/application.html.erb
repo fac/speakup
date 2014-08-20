@@ -8,6 +8,9 @@
 </head>
 <body>
 
+<h1>Speakup</h1>
+
+<%= link_to 'Lobby', rooms_path %>
 <% if current_user %>
   <%= button_to 'Log out', user_path(current_user), :method => 'delete' %>
 <% else %>
