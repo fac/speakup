@@ -7,29 +7,34 @@ class Websocket
 
   def initialize(app)
     @app = app
+    @clients = []
   end
 
   def call(env)
     if Faye::WebSocket.websocket?(env)
       ws = Faye::WebSocket.new(env, nil, {ping: KEEPALIVE_TIME })
       ws.on :open do |event|
-        timer = EM.add_periodic_timer(REFRESH_PERIOD) do
-          begin
-            # For now, we just send all data to all clients
-            # and let them sort it out.
-            ws.send(Room.average_scores.to_json) if ws
-          rescue StandardError => e
-            EM.cancel_timer(timer)
-            raise e
-          end
-        end
+        @clients << ws
+        ws.send('{"message": "hello"}')
       end
 
       ws.on :message do |event|
+        data = JSON.parse(event.data)
+        case data["message"]
+        when "get_scores"
+          @clients.each do |ws|
+            # For now, we just send all data to all clients
+            # and let them sort it out.
+            ws.send({message: "scores", scores: Room.average_scores}.to_json)
+          end
+        else
+          puts "Unrecognised message"
+          puts data
+        end
       end
 
       ws.on :close do |event|
-        # @clients.delete(ws)
+        @clients.delete(ws)
         ws = nil
       end
 

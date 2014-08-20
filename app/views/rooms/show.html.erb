@@ -23,12 +23,24 @@
 
 <script>
   var scheme   = "<%= ws_scheme %>";
+  var room_id = "<%= @room.id%>";
   var uri      = scheme + window.document.location.host + "/";
   console.log(uri);
   var ws       = new WebSocket(uri);
+
   ws.onmessage = function(message) {
-    var room_id = "<%= @room.id%>";
-    scores = JSON.parse(message.data);
-    $('#score').html(scores[room_id]);
+    data = JSON.parse(message.data);
+    console.log(data);
+    if (data.message === "hello") {
+      console.log("hello");
+      ws.send(JSON.stringify({message: "get_scores"}));
+    } else if (data.message == "scores") {
+      scores = data.scores;
+      $('#score').html(scores[room_id]);
+    } else {
+      console.log("Unrecognised message");
+      console.log(data);
+    }
+
   };
 </script>
