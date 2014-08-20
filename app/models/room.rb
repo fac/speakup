@@ -4,6 +4,17 @@ class Room < ActiveRecord::Base
   has_many :ratings
 
   def average_rating
-    ratings.average(:score) || 0
+    ratings = self.class.find_by_sql(
+      "SELECT t1.score
+      FROM ratings AS t1
+      LEFT OUTER JOIN ratings AS t2
+      ON t1.user_id = t2.user_id
+      AND (t1.created_at < t2.created_at
+         OR (t1.created_at = t2.created_at AND t1.id < t2.id))
+      WHERE t2.user_id IS NULL
+      AND t1.room_id = #{self.id}")
+
+    return nil if ratings.empty?
+    ratings.map(&:score).sum.to_f/ratings.length
   end
 end
