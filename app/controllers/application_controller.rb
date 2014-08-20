@@ -13,4 +13,9 @@ class ApplicationController < ActionController::Base
     current_user.present?
   end
   helper_method :logged_in?
+
+  def ws_scheme
+    ENV['RACK_ENV'] == "production" ? "wss://" : "ws://"
+  end
+  helper_method :ws_scheme
 end

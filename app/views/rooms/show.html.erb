@@ -19,3 +19,15 @@
 <% else %>
   <p>Log in to join room</p>
 <% end %>
+
+
+<script>
+  var scheme   = "<%= ws_scheme %>";
+  var uri      = scheme + window.document.location.host + "/";
+  console.log(uri);
+  var ws       = new WebSocket(uri);
+  ws.onmessage = function(message) {
+    console.log("got message");
+    console.log(message.data);
+  };
+</script>

@@ -3,6 +3,7 @@ class Room < ActiveRecord::Base
   has_many :users, :through => :participations
   has_many :ratings
 
+  # TODO - rename to average_score
   def average_rating
     ratings = self.class.find_by_sql(
       "SELECT t1.score
@@ -16,6 +17,10 @@ class Room < ActiveRecord::Base
 
     return nil if ratings.empty?
     ratings.map(&:score).sum.to_f/ratings.length
+  end
+
+  def self.average_scores
+    Hash[*Room.all.map {|room| [room.id, room.average_rating]}.flatten]
   end
 
 end
