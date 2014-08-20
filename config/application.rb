@@ -22,8 +22,10 @@ module Speakup
 
     config.autoload_paths += %W(#{config.root}/app/middleware)
 
-    config.middleware.use("Websocket")
-    config.middleware.delete Rack::Lock
+    # This websockets implementation is a horrible hack.
     Faye::WebSocket.load_adapter('thin')
+    config.middleware.use("Websocket")
+    # Rack::Lock was causing problems with Faye.
+    config.middleware.delete Rack::Lock
   end
 end

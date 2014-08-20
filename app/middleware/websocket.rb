@@ -1,8 +1,6 @@
-require 'thread'
-
+# This is a total hack.
 class Websocket
 
-  REFRESH_PERIOD = 3 # seconds
   KEEPALIVE_TIME = 15 # seconds
 
   def initialize(app)
