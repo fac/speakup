@@ -9,6 +9,10 @@ class Room
     @uri = ws_scheme + window.document.location.host + "/";
 
   start: ->
+    @component = Speakup.Components.Room()
+    React.renderComponent(
+      @component,
+      document.getElementById('room'))
     @ws = new WebSocket(@uri);
     @ws.onmessage = (message) =>
       data = JSON.parse(message.data)
