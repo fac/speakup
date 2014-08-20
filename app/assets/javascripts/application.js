@@ -16,5 +16,6 @@
 //= require turbolinks
 //= require es5-shim/es5-shim
 //= require react/react
+//= require sprintf/src/sprintf
 //= require speakup
 //= require_tree .

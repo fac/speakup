@@ -1,15 +1,8 @@
 <h2><%= @room.name %></h2>
 <p>Participants: <%= @room.users.size %></p>
-<p>Average score: <span id="score"><%= average_rating(@room) %></span></p>
 
 <% if logged_in? %>
   <% if current_user.in_room?(@room) %>
-    <%= form_for default_rating(@rating, @room) do |f| %>
-      <%= f.hidden_field :room_id %>
-      <%= f.label :score, 'Rating' %>
-      <%= f.select :score, options_for_rating %>
-      <%= f.button 'Submit score' %>
-    <% end %>
   <% else %>
     <%= form_for @participation do |f| %>
       <%= f.hidden_field :room_id %>
@@ -27,7 +20,15 @@
   $(document).ready(function() {
     var scheme   = "<%= ws_scheme %>";
     var room_id = "<%= @room.id%>";
-    var room = new Room(room_id, scheme);
-    room.start();
+    var initialAvgScore = <%= @room.average_rating || "null" %>;
+    var initialUserScore = <%= default_rating(@rating, @room).score || "null" %>;
+    window.AUTHENTICITY_TOKEN = "<%= form_authenticity_token %>";
+
+    React.renderComponent(
+      Speakup.Components.Room({uri: wsUri(scheme),
+                               initialUserScore: initialUserScore,
+                               initialAvgScore: initialAvgScore,
+                               roomId: room_id}),
+      document.getElementById('room'));
   });
 </script>

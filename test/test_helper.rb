@@ -24,6 +24,7 @@ class ActionDispatch::IntegrationTest
   self.use_transactional_fixtures = false
 
   setup do
+    Capybara.default_wait_time = 5
     Capybara.current_driver = :poltergeist
     DatabaseCleaner.strategy = :deletion
     DatabaseCleaner.start
