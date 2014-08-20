@@ -22,25 +22,11 @@
 
 
 <script>
-  var scheme   = "<%= ws_scheme %>";
-  var room_id = "<%= @room.id%>";
-  var uri      = scheme + window.document.location.host + "/";
-  console.log(uri);
-  var ws       = new WebSocket(uri);
-
-  ws.onmessage = function(message) {
-    data = JSON.parse(message.data);
-    console.log(data);
-    if (data.message === "hello") {
-      console.log("hello");
-      ws.send(JSON.stringify({message: "get_scores"}));
-    } else if (data.message == "scores") {
-      scores = data.scores;
-      $('#score').html(scores[room_id]);
-    } else {
-      console.log("Unrecognised message");
-      console.log(data);
-    }
-
-  };
+  $(document).ready(function() {
+    var scheme   = "<%= ws_scheme %>";
+    var room_id = "<%= @room.id%>";
+    console.log("here");
+    var room = new Room(room_id, scheme);
+    room.start();
+  });
 </script>

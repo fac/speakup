@@ -30,15 +30,16 @@ gem 'spring',        group: :development
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-#gem 'puma'
 gem 'thin'
 gem 'faye-websocket'
+gem 'sprockets-coffee-react', '~> 0.4.2'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
 # Use debugger
 gem 'byebug', group: [:development, :test]
+
 
 group :test do
   gem 'capybara'
