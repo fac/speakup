@@ -9,7 +9,6 @@ class Room
     @uri = ws_scheme + window.document.location.host + "/";
 
   start: ->
-    console.log("starting")
     @ws = new WebSocket(@uri);
     @ws.onmessage = (message) =>
       data = JSON.parse(message.data)

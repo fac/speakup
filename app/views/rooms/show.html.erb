@@ -20,12 +20,10 @@
   <p>Log in to join room</p>
 <% end %>
 
-
 <script>
   $(document).ready(function() {
     var scheme   = "<%= ws_scheme %>";
     var room_id = "<%= @room.id%>";
-    console.log("here");
     var room = new Room(room_id, scheme);
     room.start();
   });
