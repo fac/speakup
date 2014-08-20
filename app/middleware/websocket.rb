@@ -9,19 +9,6 @@ class Websocket
     @app = app
   end
 
-  def setup_timer
-    return if @timer
-    @timer = EM.add_periodic_timer(REFRESH_PERIOD) do
-      begin
-        @clients.each do |ws|
-          ws.send(Rooms.average_scores.to_json)
-        end
-      rescue
-        EM.cancel_timer(@timer)
-      end
-    end
-  end
-
   def call(env)
     if Faye::WebSocket.websocket?(env)
       ws = Faye::WebSocket.new(env, nil, {ping: KEEPALIVE_TIME })

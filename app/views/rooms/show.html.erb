@@ -1,6 +1,6 @@
 <h2><%= @room.name %></h2>
 <p>Participants: <%= @room.users.size %></p>
-<p>Average rating: <%= average_rating(@room) %></p>
+<p>Average score: <span id="score"><%= average_rating(@room) %></span></p>
 
 <% if logged_in? %>
   <% if current_user.in_room?(@room) %>
@@ -27,7 +27,8 @@
   console.log(uri);
   var ws       = new WebSocket(uri);
   ws.onmessage = function(message) {
-    console.log("got message");
-    console.log(message.data);
+    var room_id = "<%= @room.id%>";
+    scores = JSON.parse(message.data);
+    $('#score').html(scores[room_id]);
   };
 </script>
