@@ -90,7 +90,7 @@ Speakup.Components.Room = React.createClass
                        {@btn(5, " (Best)")}
                      </div>
 
-    scoreClass = if @state.avgScore < 1.5
+    scoreClass = if @state.avgScore < 2
                    "badScore"
                  else
                    ""
