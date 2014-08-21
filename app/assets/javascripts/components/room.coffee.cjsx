@@ -7,25 +7,19 @@ Speakup.Components.Room = React.createClass
     }
 
   componentDidMount: ->
-    console.log("component mounted")
-    console.log(@props.uri)
+    @state.ws.onopen = (message) =>
+      @getScores()
     @state.ws.onmessage = (message) =>
-      console.log("got message")
       data = JSON.parse(message.data)
       switch data.message
-        when "hello"
-          @getScores()
         when "scores"
           scores = data.scores
-          console.log("setting score")
-          console.log(scores)
           @setState(avgScore: scores[@props.roomId])
         else
           console.log("Unrecognised message")
           console.log(data)
 
   getScores: ->
-    console.log("requesting scores")
     @state.ws.send(JSON.stringify({message: "get_scores"}));
 
   displayScore: (score) ->
@@ -48,7 +42,6 @@ Speakup.Components.Room = React.createClass
       dataType: 'json' }
 
   onSelect: (event) ->
-    console.log(event.target.value)
     @setState(userScore: event.target.value)
     @postRating(event.target.value).then(@getScores)
 
@@ -56,7 +49,7 @@ Speakup.Components.Room = React.createClass
     <div>
       <p>Average score: {@displayScore(@state.avgScore)}</p>
       <form onChange={@onSelect}>
-        <label htmlFor="rating_score">Rating</label>
+        <label htmlFor="rating_score">Rating </label>
         <select value={@state.userScore} id="rating_score">
           <option value="1">1</option>
           <option value="2">2</option>
