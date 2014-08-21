@@ -15,6 +15,8 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require es5-shim/es5-shim
+//= require d3/d3
+//= require rickshaw/rickshaw
 //= require react/react
 //= require sprintf/src/sprintf
 //= require speakup

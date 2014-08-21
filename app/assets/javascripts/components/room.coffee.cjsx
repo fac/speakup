@@ -4,9 +4,11 @@ Speakup.Components.Room = React.createClass
       avgScore: this.props.initialAvgScore
       userScore: this.props.initialUserScore
       ws: new WebSocket(@props.uri)
+      avgScores: []
     }
 
   componentDidMount: ->
+    @renderChart()
     @state.ws.onopen = (message) =>
       @getScores()
     @state.ws.onmessage = (message) =>
@@ -52,12 +54,28 @@ Speakup.Components.Room = React.createClass
     else
       "btn btn-default"
 
+  renderChart: ->
+    graph = new Rickshaw.Graph({
+      element: document.querySelector("#chart"),
+      height: 200,
+      series: [{
+        color: 'steelblue',
+        data: [
+              { x: 0, y: 40 },
+              { x: 1, y: 49 },
+              { x: 2, y: 38 },
+              { x: 3, y: 30 },
+              { x: 4, y: 32 }
+              ]}]})
+    graph.render()
+
   btn: (score, comment) ->
     <a href="#" data-value={score} onClick={@onSelect} className={@btnClass(score)}>{"#{score}#{comment}"}</a>
 
   render: ->
     <div>
       <p><strong>Average score</strong> {@displayScore(@state.avgScore)}</p>
+      <div id="chart"></div>
       <div className="btn-group btn-group-justified">
         {@btn(1, " (Worst)")}
         {@btn(2, "")}
@@ -66,3 +84,5 @@ Speakup.Components.Room = React.createClass
         {@btn(5, " (Best)")}
       </div>
     </div>
+
+
