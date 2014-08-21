@@ -10,7 +10,7 @@ class RoomRatingTest < ActionDispatch::IntegrationTest
 
   test 'user can see current room rating' do
     visit room_path(@room)
-    assert page.has_content? 'Average score: none'
+    assert page.has_content? 'Average score none'
   end
 
   test 'defaults score to 3' do

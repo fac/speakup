@@ -47,7 +47,7 @@ Speakup.Components.Room = React.createClass
 
   render: ->
     <div>
-      <p>Average score: {@displayScore(@state.avgScore)}</p>
+      <p><strong>Average score</strong> {@displayScore(@state.avgScore)}</p>
       <form onChange={@onSelect}>
         <label htmlFor="rating_score">Rating </label>
         <select value={@state.userScore} id="rating_score">

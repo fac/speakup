@@ -1,20 +1,40 @@
-<h2><%= @room.name %></h2>
-<p>Participants: <%= @room.users.size %></p>
+<div class="page-header">
+  <h1><%= @room.name %></h1>
+</div>
 
-<% if logged_in? %>
-  <% if current_user.in_room?(@room) %>
-    <%= button_to 'Leave room', participation_path(@participation), :method => 'delete' %>
-  <% else %>
-    <%= form_for @participation do |f| %>
-      <%= f.hidden_field :room_id %>
-      <%= f.button 'Join room' %>
-    <% end %>
-  <% end %>
-<% else %>
-  <p>Log in to join room</p>
-<% end %>
+<div class="col-lg-4">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Activity</h3>
+    </div>
+    <div class="panel-body">
+      <p><strong>Participants</strong> <%= @room.users.size %></p>
+       <% if logged_in? %>
+         <% if current_user.in_room?(@room) %>
+           <%= button_to 'Leave room', participation_path(@participation), :method => 'delete', :class => "btn btn-warning" %>
+         <% else %>
+           <%= form_for @participation do |f| %>
+             <%= f.hidden_field :room_id %>
+             <%= f.button 'Join room', class: "btn btn-primary" %>
+           <% end %>
+         <% end %>
+       <% else %>
+         <p>(Log in to join room)</p>
+       <% end %>
+      </div>
+  </div>
+</div>
 
-<div id="room">
+<div class="col-lg-6">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Volume</h3>
+    </div>
+    <div class="panel-body">
+      <div id="room">
+      </div>
+    </div>
+  </div>
 </div>
 
 <script>
