@@ -1,18 +1,20 @@
-<h2>
+<div class="page-header">
+  <h1>
   Lobby
-</h2>
+  </h1>
+</div>
 
 <h3>Rooms</h3>
-<ul>
+<ul class="list-group">
   <% @rooms.each do |room| %>
-    <li>
-      <td><%= link_to room.name, room %></td>
+    <li class="list-group-item">
+      <span class="badge"><%= room.users.count %></span>
+      <%= link_to room.name, room %>
     </li>
   <% end %>
 </ul>
-
 <br>
 
 <% if logged_in? %>
-  <%= link_to 'New Room', new_room_path %>
+  <%= link_to 'New Room', new_room_path, :class => "btn btn-primary" %>
 <% end %>
