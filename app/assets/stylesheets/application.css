@@ -13,3 +13,13 @@
  *= require_tree .
  *= require_self
  */
+
+
+.badScore {
+  color: #900000;
+  font-weight: bold;
+}
+
+.stat {
+  font-size: 200%;
+}

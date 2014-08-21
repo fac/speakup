@@ -81,8 +81,15 @@ Speakup.Components.Room = React.createClass
     <a href="#" data-value={score} onClick={@onSelect} className={@btnClass(score)}>{"#{score}#{comment}"}</a>
 
   render: ->
+    scoreClass = if @state.avgScore < 1.5
+                   "badScore"
+                 else
+                   ""
     <div>
-      <p><strong>Average score</strong> {@displayScore(@state.avgScore)}</p>
+      <p className="stat">
+        <strong>Average score </strong>
+        <span className={scoreClass}>{@displayScore(@state.avgScore)}</span>
+      </p>
       <div id="chart"></div>
       <div className="btn-group btn-group-justified">
         {@btn(1, " (Worst)")}
