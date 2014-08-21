@@ -45,6 +45,8 @@
     var initialUserScore = <%= default_rating(@rating, @room).score || "null" %>;
     window.AUTHENTICITY_TOKEN = "<%= form_authenticity_token %>";
 
+    
+
     React.renderComponent(
       Speakup.Components.Room({uri: wsUri(scheme),
                                initialUserScore: initialUserScore,
