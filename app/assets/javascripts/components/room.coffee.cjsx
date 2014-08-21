@@ -42,20 +42,27 @@ Speakup.Components.Room = React.createClass
       dataType: 'json' }
 
   onSelect: (event) ->
-    @setState(userScore: event.target.value)
-    @postRating(event.target.value).then(@getScores)
+    value = event.target.dataset.value
+    @setState(userScore: value)
+    @postRating(value).then(@getScores)
+
+  btnClass: (score) ->
+    if score?.toString() == @state.userScore?.toString()
+      "active btn btn-default"
+    else
+      "btn btn-default"
+
+  btn: (score, comment) ->
+    <a href="#" data-value={score} onClick={@onSelect} className={@btnClass(score)}>{"#{score}#{comment}"}</a>
 
   render: ->
     <div>
       <p><strong>Average score</strong> {@displayScore(@state.avgScore)}</p>
-      <form onChange={@onSelect}>
-        <label htmlFor="rating_score">Rating </label>
-        <select value={@state.userScore} id="rating_score">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
-      </form>
+      <div className="btn-group btn-group-justified">
+        {@btn(1, " (Worst)")}
+        {@btn(2, "")}
+        {@btn(3, "")}
+        {@btn(4, "")}
+        {@btn(5, " (Best)")}
+      </div>
     </div>

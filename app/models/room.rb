@@ -3,6 +3,8 @@ class Room < ActiveRecord::Base
   has_many :users, :through => :participations
   has_many :ratings
 
+  validates :name, :presence => true
+
   def average_score
     ratings = self.class.find_by_sql(
       "SELECT t1.score
@@ -21,5 +23,4 @@ class Room < ActiveRecord::Base
   def self.average_scores
     Hash[*Room.all.map {|room| [room.id, room.average_score]}.flatten]
   end
-
 end
