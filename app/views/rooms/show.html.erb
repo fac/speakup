@@ -21,7 +21,7 @@
   $(document).ready(function() {
     var scheme   = "<%= ws_scheme %>";
     var room_id = "<%= @room.id%>";
-    var initialAvgScore = <%= @room.average_rating || "null" %>;
+    var initialAvgScore = <%= @room.average_score || "null" %>;
     var initialUserScore = <%= default_rating(@rating, @room).score || "null" %>;
     window.AUTHENTICITY_TOKEN = "<%= form_authenticity_token %>";
 
