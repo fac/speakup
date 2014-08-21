@@ -43,14 +43,14 @@
     var room_id = "<%= @room.id%>";
     var initialAvgScore = <%= @room.average_score || "null" %>;
     var initialUserScore = <%= default_rating(@rating, @room).score || "null" %>;
+    var canSubmitScore = <%= logged_in? && current_user.in_room?(@room) %>
     window.AUTHENTICITY_TOKEN = "<%= form_authenticity_token %>";
-
-    
 
     React.renderComponent(
       Speakup.Components.Room({uri: wsUri(scheme),
                                initialUserScore: initialUserScore,
                                initialAvgScore: initialAvgScore,
+                               canSubmitScore: canSubmitScore,
                                roomId: room_id}),
       document.getElementById('room'));
   });
