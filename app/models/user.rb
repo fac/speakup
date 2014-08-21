@@ -16,4 +16,8 @@ class User < ActiveRecord::Base
   def last_rating_for(room)
     ratings.where(room: room).order(created_at: :desc).first
   end
+
+  def participation_for(room)
+    participations.where(room: room).order(created_at: :desc).first
+  end
 end

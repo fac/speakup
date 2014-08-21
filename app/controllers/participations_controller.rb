@@ -9,7 +9,13 @@ class ParticipationsController < ApplicationController
       redirect_to room_path(participation.room)
     end
   end
-  # Never trust parameters from the scary internet, only allow the white list through.
+
+  def destroy
+    participation = Participation.find(params[:id])
+    participation.destroy
+    redirect_to room_path(participation.room)
+  end
+
   def participation_params
     params.require(:participation).permit(:room_id)
   end

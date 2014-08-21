@@ -11,7 +11,7 @@ class RoomsController < ApplicationController
   # GET /rooms/1.json
   def show
     @rating = current_user.try(:last_rating_for, @room).try(:dup)
-    @participation = Participation.new(room: @room)
+    @participation = current_user.try(:participation_for, @room) || Participation.new(room: @room)
   end
 
   # GET /rooms/new

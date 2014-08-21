@@ -3,6 +3,7 @@
 
 <% if logged_in? %>
   <% if current_user.in_room?(@room) %>
+    <%= button_to 'Leave room', participation_path(@participation), :method => 'delete' %>
   <% else %>
     <%= form_for @participation do |f| %>
       <%= f.hidden_field :room_id %>
