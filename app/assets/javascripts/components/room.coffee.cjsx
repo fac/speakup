@@ -9,6 +9,7 @@ Speakup.Components.Room = React.createClass
         when "scores"
           scores = data.scores
           score = scores[@props.roomId]
+          console.log("setting avgscore")
           @setState(avgScore: score)
         else
           console.log("Unrecognised message")
@@ -18,9 +19,6 @@ Speakup.Components.Room = React.createClass
       userScore: this.props.initialUserScore
       ws: ws
     }
-
-  componentDidMount: ->
-    @renderChart()
 
   getScores: ->
     @state.ws.send(JSON.stringify({message: "get_scores"}));
@@ -56,27 +54,6 @@ Speakup.Components.Room = React.createClass
     else
       "btn btn-default"
 
-  renderChart: ->
-    graph = new Rickshaw.Graph({
-      element: document.querySelector("#chart"),
-      height: 200,
-      renderer: 'bar',
-      series: [{
-        color: 'steelblue',
-        data: [
-              { x: 0, y: 40 },
-              { x: 1, y: 49 },
-              { x: 2, y: 38 },
-              { x: 3, y: 30 },
-              { x: 4, y: 8 },
-              { x: 5, y: 9 },
-              { x: 6, y: 10 },
-              { x: 7, y: 12 },
-              { x: 8, y: 9 },
-              { x: 9, y: 40 },
-              ]}]})
-    graph.render()
-
   btn: (score, comment) ->
     <a href="#" data-value={score} onClick={@onSelect} className={@btnClass(score)}>{"#{score}#{comment}"}</a>
 
@@ -99,7 +76,7 @@ Speakup.Components.Room = React.createClass
         <strong>Average score </strong>
         <span className={scoreClass}>{@displayScore(@state.avgScore)}</span>
       </p>
-      <div id="chart"></div>
+      <Speakup.Components.Chart avgScore={@state.avgScore}/>
       {scoreButtons}
     </div>
 
