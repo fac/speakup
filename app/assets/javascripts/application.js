@@ -19,5 +19,6 @@
 //= require rickshaw/rickshaw
 //= require react/react
 //= require sprintf/src/sprintf
+//= require bootstrap/js/collapse
 //= require speakup
 //= require_tree .

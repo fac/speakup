@@ -12,7 +12,12 @@
 <div class="navbar navbar-default navbar-top">
   <div class="container">
     <div class="navbar-header">
-      <a href="" class="navbar-brand">SpeakUp</a>
+      <%= link_to "SpeakUp", root_path, class: "navbar-brand" %>
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
     </div>
     <div class="navbar-collapse collapse" id="navbar-main">
       <ul class="nav navbar-nav">
@@ -20,25 +25,23 @@
           <%= link_to 'Lobby', rooms_path %>
         </li>
       </ul>
-
       <ul class="nav navbar-nav navbar-right">
-        <li>
-          <% if current_user %>
-            <%= form_for current_user, html: {class: "navbar-form", method: 'delete'} do |f| %>
-              <%= f.hidden_field :name %>
-              <%= f.button 'Log out', class: "btn btn-default btn-xs" %>
-            <% end %>
-          <% else %>
-            <%= form_for User.new, html: {class: "navbar-form"} do |f| %>
-              <%= f.hidden_field :name %>
-              <%= f.button 'Log in', class: "btn btn-default btn-xs" %>
-            <% end %>
+        <% if current_user %>
+          <%= form_for current_user, html: {class: "navbar-form", method: 'delete'} do |f| %>
+            <%= f.hidden_field :name %>
+            <%= f.button 'Log out', class: "btn btn-default navbar-btn" %>
           <% end %>
-        </li>
+        <% else %>
+          <%= form_for User.new, html: {class: "navbar-form"} do |f| %>
+            <%= f.hidden_field :name %>
+            <%= f.button 'Log in', class: "btn btn-default navbar-btn" %>
+          <% end %>
+        <% end %>
       </ul>
-   </div>
+    </div>
   </div>
 </div>
+
 
 <div class="container">
   <div class="row">
