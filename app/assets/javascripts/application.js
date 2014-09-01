@@ -17,7 +17,7 @@
 //= require es5-shim/es5-shim
 //= require d3/d3
 //= require rickshaw/rickshaw
-//= require react/react
+//= require react/react-with-addons
 //= require sprintf/src/sprintf
 //= require bootstrap/js/collapse
 //= require speakup

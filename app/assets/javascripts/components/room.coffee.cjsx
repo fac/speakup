@@ -57,27 +57,43 @@ Speakup.Components.Room = React.createClass
   btn: (score, comment) ->
     <a href="#" data-value={score} onClick={@onSelect} className={@btnClass(score)}>{"#{score}#{comment}"}</a>
 
+  tooQuiet: ->
+    (@state.avgScore && @state.avgScore < 3)
+
   render: ->
     scoreButtons = if @props.canSubmitScore
                      <div className="btn-group btn-group-justified">
-                       {@btn(1, " (Worst)")}
+                       {@btn(1, "")}
                        {@btn(2, "")}
                        {@btn(3, "")}
                        {@btn(4, "")}
-                       {@btn(5, " (Best)")}
+                       {@btn(5, "")}
                      </div>
 
-    scoreClass = if @state.avgScore < 2
-                   "badScore"
-                 else
-                   ""
     <div>
-      <p className="stat">
-        <strong>Average score </strong>
-        <span className={scoreClass}>{@displayScore(@state.avgScore)}</span>
-      </p>
-      <Speakup.Components.Chart avgScore={@state.avgScore}/>
-      {scoreButtons}
+      <div className="col-lg-3">
+        <div className={React.addons.classSet("panel": true, verdict:true, louder: @tooQuiet())}>
+          { if @tooQuiet()
+              "LOUDER"
+            else
+              "OKAY"
+          }
+        </div>
+      </div>
+      <div className="col-lg-6">
+        <div className="panel panel-primary">
+          <div className="panel-heading">
+            <h3 className="panel-title">Volume2</h3>
+          </div>
+          <div className="panel-body">
+            <p className="stat">
+              <strong>Average score </strong>
+              {@displayScore(@state.avgScore)}
+            </p>
+            <Speakup.Components.Chart avgScore={@state.avgScore}/>
+            {scoreButtons}
+          </div>
+        </div>
+      </div>
     </div>
-
 

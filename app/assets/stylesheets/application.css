@@ -14,12 +14,18 @@
  *= require_self
  */
 
-
-.badScore {
-  color: #900000;
-  font-weight: bold;
-}
-
 .stat {
   font-size: 200%;
+}
+
+.verdict {
+  background-color: #008cba;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+  font-size: 400%;
+}
+
+.verdict.louder {
+  background-color: #900000;
 }

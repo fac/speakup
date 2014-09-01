@@ -2,7 +2,7 @@
   <h1><%= @room.name %></h1>
 </div>
 
-<div class="col-lg-4">
+<div class="col-lg-3">
   <div class="panel panel-primary">
     <div class="panel-heading">
       <h3 class="panel-title">Activity</h3>
@@ -25,17 +25,8 @@
   </div>
 </div>
 
-<div class="col-lg-6">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Volume</h3>
-    </div>
-    <div class="panel-body">
-      <div id="room">
-      </div>
-    </div>
-  </div>
-</div>
+
+<div id="room-panels"/>
 
 <script>
   $(document).ready(function() {
@@ -52,6 +43,6 @@
                                initialAvgScore: initialAvgScore,
                                canSubmitScore: canSubmitScore,
                                roomId: room_id}),
-      document.getElementById('room'));
+      document.getElementById('room-panels'));
   });
 </script>
