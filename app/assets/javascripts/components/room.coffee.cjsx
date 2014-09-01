@@ -83,7 +83,7 @@ Speakup.Components.Room = React.createClass
       <div className="col-lg-6">
         <div className="panel panel-primary">
           <div className="panel-heading">
-            <h3 className="panel-title">Volume2</h3>
+            <h3 className="panel-title">Volume</h3>
           </div>
           <div className="panel-body">
             <p className="stat">
