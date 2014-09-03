@@ -14,6 +14,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require modernizr/modernizr
 //= require es5-shim/es5-shim
 //= require d3/d3
 //= require rickshaw/rickshaw

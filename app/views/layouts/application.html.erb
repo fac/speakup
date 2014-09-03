@@ -42,9 +42,20 @@
   </div>
 </div>
 
-
 <div class="container">
   <div class="row">
+    <div class="col-lg-12">
+      <div class="alert alert-danger" role="alert" id="unsupported-browser" style="display:none">
+        SpeakUp does not support your browser.
+      </div>
+      <script>
+       $(document).ready(function() {
+         if (!Modernizr.websockets) {
+           $('#unsupported-browser').show();
+          }
+       });
+      </script>
+    </div>
     <div class="col-lg-12">
       <%= yield %>
     </div>
