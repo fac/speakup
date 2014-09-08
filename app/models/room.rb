@@ -5,6 +5,8 @@ class Room < ActiveRecord::Base
 
   validates :name, :presence => true
 
+  scope :stale, lambda { where("rooms.created_at < ?", 2.days.ago) }
+
   def average_score
     ratings = self.class.find_by_sql(
       "SELECT t1.score
