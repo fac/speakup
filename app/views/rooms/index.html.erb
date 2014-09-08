@@ -10,6 +10,7 @@
     <li class="list-group-item">
       <span class="badge"><%= room.users.count %></span>
       <%= link_to room.name, room %>
+      <em>(created <%= room.created_at.strftime "%Y-%m-%d" %>)</em>
     </li>
   <% end %>
 </ul>
