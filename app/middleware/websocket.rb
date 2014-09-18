@@ -13,9 +13,6 @@ class Websocket
   def call(env)
     if Faye::WebSocket.websocket?(env)
       ws = Faye::WebSocket.new(env, nil, {ping: KEEPALIVE_TIME })
-      puts "-------"*10
-      puts ws.object_id
-      puts "-------"*10
       ws.on :open do |event|
         @clients = WebsocketClients.instance.add(ws)
       end

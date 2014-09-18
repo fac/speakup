@@ -5,12 +5,10 @@ Speakup.Components.Room = React.createClass
       # do nothing
     ws.onmessage = (message) =>
       data = JSON.parse(message.data)
-      console.log(data)
       switch data.message
         when "room_data"
           roomData = data.roomData
           score = roomData[@props.roomId].avgScore
-          console.log("setting avgscore")
           @setState(avgScore: score)
         else
           console.log("Unrecognised message")
@@ -22,7 +20,7 @@ Speakup.Components.Room = React.createClass
     }
 
   componentWillUnmount: ->
-    @set.ws.close()
+    @state.ws.close()
 
   displayScore: (score) ->
     if score

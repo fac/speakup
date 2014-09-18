@@ -1,7 +1,8 @@
 Speakup.Components.ParticipantCount = React.createClass
 
   componentWillUnmount: ->
-    @set.ws.close()
+    alert('unmounting')
+    @state.ws.close()
 
   getInitialState: ->
     ws = createWebsocket @props.uri, (data) =>
