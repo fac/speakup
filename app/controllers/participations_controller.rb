@@ -8,12 +8,14 @@ class ParticipationsController < ApplicationController
     else
       redirect_to room_path(participation.room)
     end
+    WebsocketClients.instance.push('room_data', Room.summary)
   end
 
   def destroy
     participation = Participation.find(params[:id])
     participation.destroy
     redirect_to room_path(participation.room)
+    WebsocketClients.instance.push('room_data', Room.summary)
   end
 
   def participation_params

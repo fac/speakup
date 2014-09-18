@@ -21,7 +21,7 @@ Speakup.Components.Room = React.createClass
       ws: ws
     }
 
-  getScores: ->
+  getRoomData: ->
     @state.ws.send(JSON.stringify({message: "room_data"}));
 
   displayScore: (score) ->
@@ -46,7 +46,7 @@ Speakup.Components.Room = React.createClass
   onSelect: (event) ->
     value = event.target.dataset.value
     @setState(userScore: value)
-    @postRating(value).then(@getScores)
+    @postRating(value).then(@getRoomData)
     return false
 
   btnClass: (score) ->

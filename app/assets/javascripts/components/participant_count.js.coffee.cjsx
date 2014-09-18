@@ -15,6 +15,14 @@ Speakup.Components.ParticipantCount = React.createClass
       ws: ws
     }
 
+  getRoomData: ->
+    @state.ws.send(JSON.stringify({message: "room_data"}));
+
+  componentDidMount: ->
+    $('#participants-panel form').submit (event) =>
+      console.log('submitting...')
+      @getRoomData()
+
   render: ->
     <p className="stat">
       <strong>Participants</strong> {@state.participants}
