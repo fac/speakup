@@ -8,7 +8,7 @@
       <h3 class="panel-title">Activity</h3>
     </div>
     <div class="panel-body">
-      <p class="stat"><strong>Participants</strong> <%= @room.users.size %></p>
+       <div id="participants"></div>
        <% if logged_in? %>
          <% if current_user.in_room?(@room) %>
            <%= button_to 'Leave room', participation_path(@participation), :method => 'delete', :class => "btn btn-warning" %>
@@ -37,6 +37,9 @@
     var canSubmitScore = <%= logged_in? && current_user.in_room?(@room) %>
     window.AUTHENTICITY_TOKEN = "<%= form_authenticity_token %>";
 
+    React.renderComponent(
+      Speakup.Components.ParticipantCount({initialParticipants: <%= @room.users.size %>}),
+      document.getElementById('participants'));
     React.renderComponent(
       Speakup.Components.Room({uri: wsUri(scheme),
                                initialUserScore: initialUserScore,
