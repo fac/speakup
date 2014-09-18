@@ -38,7 +38,9 @@
     window.AUTHENTICITY_TOKEN = "<%= form_authenticity_token %>";
 
     React.renderComponent(
-      Speakup.Components.ParticipantCount({initialParticipants: <%= @room.users.size %>}),
+      Speakup.Components.ParticipantCount({uri: wsUri(scheme),
+                                           roomId: room_id,
+                                           initialParticipants: <%= @room.users.size %>}),
       document.getElementById('participants'));
     React.renderComponent(
       Speakup.Components.Room({uri: wsUri(scheme),

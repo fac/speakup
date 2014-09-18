@@ -1,22 +1,19 @@
 Speakup.Components.ParticipantCount = React.createClass
 
   getInitialState: ->
-    # TODO - dudupe with other components
-    # ws = new WebSocket(@props.uri)
-    # ws.onopen = (message) =>
-    #   # do nothing
-    # ws.onmessage = (message) =>
-    #   data = JSON.parse(message.data)
-    #   switch data.message
-    #     when "scores"
-    #       scores = data.scores
-    #       score = scores[@props.roomId]
-    #       console.log("setting avgscore")
-    #       @setState(avgScore: score)
-    #     else
-    #       console.log("Unrecognised message")
-    #       console.log(data)
-    { participants: @props.initialParticipants }
+    ws = createWebsocket @props.uri, (data) =>
+      switch data.message
+        when "room_data"
+          roomData = data.roomData
+          console.log("new participant data #{roomData[@props.roomId].participants}")
+          @setState(participants: roomData[@props.roomId].participants)
+        else
+          console.log("Unrecognised message")
+          console.log(data)
+    {
+      participants: @props.initialParticipants
+      ws: ws
+    }
 
   render: ->
     <p className="stat">
