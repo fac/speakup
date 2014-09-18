@@ -5,10 +5,9 @@ class RoomsController < ApplicationController
   # GET /rooms.json
   def index
     @rooms = Room.order(created_at: :desc)
-    puts "???-"*100
+    puts "--index--"*100
     puts WebsocketClients.instance.count
-    puts "-"*100
-    WebsocketClients.instance.push('room_data', Room.summary)
+    puts "-index ---"*100
   end
 
   # GET /rooms/1

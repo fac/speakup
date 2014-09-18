@@ -21,21 +21,7 @@ class Websocket
       end
 
       ws.on :message do |event|
-        data = JSON.parse(event.data)
-        puts "-------"*10
-        puts data
-        case data["message"]
-        when "room_data"
-          WebsocketClients.instance.push('room_data', Room.summary)
-          # @clients.each do |ws|
-          #   # For now, we just send all data to all clients
-          #   # and let them sort it out.
-          #   ws.send({message: "room_data", roomData: Room.summary}.to_json)
-          # end
-        else
-          puts "Unrecognised message"
-          puts data
-        end
+        # do nothing
       end
 
       ws.on :close do |event|

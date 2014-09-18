@@ -20,7 +20,7 @@ module Speakup
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
 
-    config.autoload_paths += %W(#{config.root}/app/middleware)
+    config.autoload_paths += %W(#{config.root}/app/middleware #{config.root}/app/speakup)
 
     # This websockets implementation is a horrible hack.
     Faye::WebSocket.load_adapter('thin')

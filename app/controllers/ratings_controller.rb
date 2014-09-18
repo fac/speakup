@@ -8,6 +8,7 @@ class RatingsController < ApplicationController
     else
       redirect_to @rating.room
     end
+    Clients.push_room_data
   end
 
   def rating_params

@@ -1,11 +1,13 @@
 Speakup.Components.ParticipantCount = React.createClass
 
+  componentWillUnmount: ->
+    @set.ws.close()
+
   getInitialState: ->
     ws = createWebsocket @props.uri, (data) =>
       switch data.message
         when "room_data"
           roomData = data.roomData
-          console.log("new participant data #{roomData[@props.roomId].participants}")
           @setState(participants: roomData[@props.roomId].participants)
         else
           console.log("Unrecognised message")
@@ -14,14 +16,6 @@ Speakup.Components.ParticipantCount = React.createClass
       participants: @props.initialParticipants
       ws: ws
     }
-
-  getRoomData: ->
-    @state.ws.send(JSON.stringify({message: "room_data"}));
-
-  componentDidMount: ->
-    $('#participants-panel form').submit (event) =>
-      console.log('submitting...')
-      @getRoomData()
 
   render: ->
     <p className="stat">
