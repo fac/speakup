@@ -8,7 +8,7 @@ class Room < ActiveRecord::Base
   scope :stale, lambda { where("rooms.created_at < ?", 2.days.ago) }
 
   def average_score
-    ratings = self.class.find_by_sql(
+    ratings = self.class.find_by_sql([
       "SELECT t1.score
       FROM ratings AS t1
       LEFT OUTER JOIN ratings AS t2
@@ -16,7 +16,8 @@ class Room < ActiveRecord::Base
       AND (t1.created_at < t2.created_at
          OR (t1.created_at = t2.created_at AND t1.id < t2.id))
       WHERE t2.user_id IS NULL
-      AND t1.room_id = #{self.id}")
+      AND t1.user_id IN (?)
+      AND t1.room_id = ? ", users.pluck(:id), self.id])
 
     return nil if ratings.empty?
     ratings.map(&:score).sum.to_f/ratings.length
