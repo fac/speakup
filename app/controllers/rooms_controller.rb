@@ -5,7 +5,6 @@ class RoomsController < ApplicationController
   # GET /rooms.json
   def index
     @rooms = Room.order(created_at: :desc)
-    Clients.push_room_data
   end
 
   # GET /rooms/1
