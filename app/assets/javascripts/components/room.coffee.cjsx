@@ -5,10 +5,11 @@ Speakup.Components.Room = React.createClass
       # do nothing
     ws.onmessage = (message) =>
       data = JSON.parse(message.data)
+      console.log(data)
       switch data.message
-        when "scores"
-          scores = data.scores
-          score = scores[@props.roomId]
+        when "room_data"
+          roomData = data.roomData
+          score = roomData[@props.roomId].avgScore
           console.log("setting avgscore")
           @setState(avgScore: score)
         else
@@ -21,7 +22,7 @@ Speakup.Components.Room = React.createClass
     }
 
   getScores: ->
-    @state.ws.send(JSON.stringify({message: "get_scores"}));
+    @state.ws.send(JSON.stringify({message: "room_data"}));
 
   displayScore: (score) ->
     if score

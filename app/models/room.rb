@@ -25,4 +25,10 @@ class Room < ActiveRecord::Base
   def self.average_scores
     Hash[*Room.all.map {|room| [room.id, room.average_score]}.flatten]
   end
+
+  def self.summary
+    Hash[*Room.all.map { |room|
+           [room.id, {avgScore: room.average_score, participants: room.users.count}]
+         }.flatten]
+  end
 end
