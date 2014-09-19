@@ -19,6 +19,15 @@ Speakup.Components.Room = React.createClass
       ws: ws
     }
 
+  componentDidMount: ->
+    $(document).keypress (event) =>
+      if (49 <= event.which && event.which <= 53)
+        @updateScore(event.which - 48)
+
+  updateScore: (score) ->
+    @setState(userScore: score)
+    @postRating(score)
+
   componentWillUnmount: ->
     @state.ws.close()
 
@@ -42,10 +51,9 @@ Speakup.Components.Room = React.createClass
       dataType: 'json' }
 
   onSelect: (event) ->
+    event.preventDefault()
     value = event.target.dataset.value
-    @setState(userScore: value)
-    @postRating(value)
-    return false
+    @updateScore(value)
 
   btnClass: (score) ->
     if score?.toString() == @state.userScore?.toString()
