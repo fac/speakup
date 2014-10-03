@@ -20,6 +20,7 @@ Speakup.Components.Room = React.createClass
     }
 
   componentDidMount: ->
+    $("button[data-toggle=popover]").popover();
     $(document).keypress (event) =>
       if (49 <= event.which && event.which <= 53)
         @updateScore(event.which - 48)
@@ -89,8 +90,17 @@ Speakup.Components.Room = React.createClass
       </div>
       <div className="col-lg-6">
         <div className="panel panel-primary">
-          <div className="panel-heading">
-            <h3 className="panel-title">Volume</h3>
+          <div className="panel-heading clearfix">
+            <h3 className="panel-title pull-left">Volume score</h3>
+            <button type="button"
+              className="btn btn-sm btn-info pull-right"
+              data-toggle="popover"
+              data-placement="bottom"
+              data-html="true"
+              data-container="body"
+              data-content="<p>Throughout the meeting, each participant in a room can vote on the meeting volume (5 is the best).</p><p>The average of each participant's <em>most recent</em> vote is displayed.</p><p>Tip: Use the number keys 1-5 to quickly enter your score.</p>">
+                ?
+            </button>
           </div>
           <div className="panel-body">
             <p className="stat">

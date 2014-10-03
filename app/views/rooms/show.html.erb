@@ -4,8 +4,17 @@
 
 <div class="col-lg-3">
   <div class="panel panel-primary">
-    <div class="panel-heading">
-      <h3 class="panel-title">Activity</h3>
+    <div class="panel-heading clearfix">
+      <h3 class="panel-title pull-left">Participants</h3>
+      <button type="button"
+        class="btn btn-sm btn-info pull-right"
+        data-toggle="popover"
+        data-placement="bottom"
+        data-html="true"
+        data-container="body"
+        data-content="<p>If you are attending a meeting remotely, join the room to give feedback on the meeting volume.</p><p>The meeting organizer does not need to join the room.</p>">
+        ?
+      </button>
     </div>
     <div class="panel-body" id="participants-panel">
        <div id="participants"></div>
@@ -51,3 +60,7 @@
       document.getElementById('room-panels'));
   });
 </script>
+<script>
+  $("button[data-toggle=popover]").popover();
+</script>
+

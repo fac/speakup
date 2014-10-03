@@ -21,5 +21,7 @@
 //= require react/react-with-addons
 //= require sprintf/src/sprintf
 //= require bootstrap/js/collapse
+//= require bootstrap/js/tooltip
+//= require bootstrap/js/popover
 //= require speakup
 //= require_tree .
