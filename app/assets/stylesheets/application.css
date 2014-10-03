@@ -29,3 +29,12 @@
 .verdict.louder {
   background-color: #900000;
 }
+
+/*
+  Bootstraps popover arrow renders in the wrong position.
+  It's unnecessary, so let's just remove it.
+*/
+
+.popover > .arrow {
+  display: none
+}
